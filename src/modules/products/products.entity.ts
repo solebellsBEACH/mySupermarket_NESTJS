@@ -3,8 +3,8 @@ import { Column, Entity, PrimaryGeneratedColumn } from "typeorm";
 @Entity()
 export class Product {
     @PrimaryGeneratedColumn("uuid")
-    id: number
-    @Column()
+    id: string
+    @Column({ unique: true })
     name: string;
     @Column()
     unitType: 'unit'|'peso'|'ml';
