@@ -1,9 +1,10 @@
-import { Body, Controller, Delete, Get, Post, Query } from '@nestjs/common';
+import { Body, Controller, Delete, Get, Post, Put, Query } from '@nestjs/common';
 import { ApiTags } from '@nestjs/swagger';
 import { DepartmentService } from './department.service';
 import { CreateDepartmentDTO } from './types/dtos/create-department-dto';
 import { DeleteDepartmentQuery } from './types/dtos/delete-department-dto';
 import { FindDepartmentQuery } from './types/dtos/findAll-department-dto';
+import { PutDepartmentDTO } from './types/dtos/put-department-dto';
 
 @ApiTags('Departamentos')
 @Controller('department')
@@ -20,5 +21,9 @@ export class DepartmentController {
     @Delete()
     async delete(@Query() deleteDepartmentQuery: DeleteDepartmentQuery) {
         return await this.departmentService.delete(deleteDepartmentQuery)
+    }
+    @Put()
+    async put(@Body() putDepartmentDTO: PutDepartmentDTO) {
+        return await this.departmentService.put( putDepartmentDTO)
     }
 }

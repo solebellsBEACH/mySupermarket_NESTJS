@@ -5,6 +5,7 @@ import { Department } from './department.entity';
 import { CreateDepartmentDTO } from './types/dtos/create-department-dto';
 import { DeleteDepartmentQuery } from './types/dtos/delete-department-dto';
 import { FindDepartmentQuery } from './types/dtos/findAll-department-dto';
+import { PutDepartmentDTO } from './types/dtos/put-department-dto';
 
 @Injectable()
 export class DepartmentService {
@@ -33,6 +34,15 @@ export class DepartmentService {
             return { success: true }
         } catch (error) {
             return { success: false }
+        }
+    }
+    async put(putDepartmentDTO: PutDepartmentDTO) {
+        const { image, name, } = putDepartmentDTO
+        try {
+            await this.departmentRepository.update({ id: putDepartmentDTO.id }, { image, name })
+            return { success: true, department: { image, name } }
+        } catch (error) {
+            return { success: false, department: null }
         }
     }
 }
