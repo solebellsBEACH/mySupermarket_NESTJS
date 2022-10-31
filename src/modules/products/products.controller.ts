@@ -1,9 +1,10 @@
-import { Body, Controller, Delete, Get, Post, Query } from '@nestjs/common';
+import { Body, Controller, Delete, Get, Post, Put, Query } from '@nestjs/common';
 import { ApiTags } from '@nestjs/swagger';
 import { ProductsService } from './products.service';
 import { CreateProductDTO } from './types/dtos';
 import { DeleteProductQuery } from './types/dtos/delete-product';
 import { FindProductQuery } from './types/dtos/find-all-products';
+import { PutProductDTO } from './types/dtos/put-product';
 
 @ApiTags('Produtos')
 @Controller('products')
@@ -20,5 +21,9 @@ export class ProductsController {
     @Delete()
     async delete(@Query() deleteProductQuery: DeleteProductQuery) {
         return await this.productService.delete(deleteProductQuery)
+    }
+    @Put()
+    async put(@Body() putProductDTO: PutProductDTO) {
+        return await this.productService.put( putProductDTO)
     }
 }
