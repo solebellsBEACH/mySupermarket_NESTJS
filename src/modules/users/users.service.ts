@@ -2,6 +2,7 @@ import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { CreateUserDTO, FindUserDTO } from './types/dtos';
+import { DeleteUserQuery } from './types/dtos/delete-user-dto';
 import { User } from './user.entity';
 
 @Injectable()
@@ -27,4 +28,12 @@ export class UsersService {
       return { user: null, success: false }
     }
   }
+  async delete(deleteUserQuery: DeleteUserQuery) {
+    try { 
+        await this.userRepository.delete({ id: deleteUserQuery.uuid })
+        return { success: true }
+    } catch (error) {
+        return { success: false }
+    }
+}
 }
